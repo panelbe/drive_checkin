@@ -52,3 +52,11 @@ jobs:
           mkdir -p .token
           npm install >/dev/null 2>&1
           npm start
+
+      - name: 🎉 Delete old workflow run
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 0
+          keep_minimum_runs: 0
