@@ -21,7 +21,7 @@ const doTask = async (cloudClient) => {
   let signPromises1 = [];
   let getSpace = [`${firstSpace}签到个人云获得(M)`];
 
-  if (process.env.PRIVATE_ONLY_FIRST != true || i == 1) {
+  if (process.env.PRIVATE_ONLY_FIRST != "true" || i == 1) {
     for (let m = 0; m < private_threadx; m++) {
       signPromises1.push(
         (async () => {
@@ -34,11 +34,11 @@ const doTask = async (cloudClient) => {
         })()
       );
     }
+    //超时中断
+    await Promise.race([Promise.all(signPromises1), sleep(timeout)]);
+    if (getSpace.length == 1) getSpace.push(" 0");
+    result.push(getSpace.join(""));
   }
-  //超时中断
-  await Promise.race([Promise.all(signPromises1), sleep(timeout)]);
-  if (getSpace.length == 1) getSpace.push(" 0");
-  result.push(getSpace.join(""));
 
   signPromises1 = [];
   getSpace = [`${firstSpace}获得(M)`];
