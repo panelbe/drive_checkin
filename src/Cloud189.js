@@ -180,6 +180,25 @@ const main = async () => {
     logger.log(
       `主账号${userNameInfo} 家庭容量+ ${capacityChange / 1024 / 1024}M`
     );
+
+    cloudClient = cloudClientMap.get(firstUserName);
+    let {
+      cloudCapacityInfo: cloudCapacityInfo2,
+      familyCapacityInfo: familyCapacityInfo2,
+    } = await cloudClient.getUserSizeInfo();
+    logger.log(
+      `个人总容量：${(
+        cloudCapacityInfo2.totalSize /
+        1024 /
+        1024 /
+        1024
+      ).toFixed(2)}G, 家庭总容量：${(
+        familyCapacityInfo2.totalSize /
+        1024 /
+        1024 /
+        1024
+      ).toFixed(2)}G`
+    );
     logger.log("");
   }
 };
