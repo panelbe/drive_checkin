@@ -2,7 +2,7 @@ name: Action
 
 on:
   schedule:
-    - cron: 55 20 * * *
+    - cron: 58 15 * * *
   workflow_dispatch:
     inputs:
       ssh:
